@@ -1,6 +1,6 @@
 package ai.quantumsense.tgmonitor.ipc.ui;
 
-import ai.quantumsense.tgmonitor.cli.CliLifecycle;
+import ai.quantumsense.tgmonitor.cli.CliLifecycleHandler;
 import ai.quantumsense.tgmonitor.corefacade.CoreFacade;
 import ai.quantumsense.tgmonitor.ipc.api.serializer.pojo.Request;
 import ai.quantumsense.tgmonitor.logincodeprompt.LoginCodePrompt;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 import static ai.quantumsense.tgmonitor.ipc.api.Requests.*;
 
-public class Endpoint implements CoreFacade, CliLifecycle {
+public class Endpoint implements CoreFacade, CliLifecycleHandler {
 
     private Logger logger = LoggerFactory.getLogger(Endpoint.class);
 

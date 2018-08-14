@@ -33,6 +33,7 @@ class RequestSender {
 
     RequestSender(Channel channel) {
         this.channel = channel;
+        declareResponseQueue();
     }
 
     private void declareResponseQueue() {

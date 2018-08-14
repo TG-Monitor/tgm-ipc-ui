@@ -111,8 +111,9 @@ class RequestSender {
             throw new RuntimeException("Received message with unexpected correlation ID: expected " + correlationId + ", but received " + delivery.getProperties().getCorrelationId());
         Response response = serializer.deserializeResponse(delivery.getBody());
         logger.debug("Received response " + response + " with matching correlation ID " + correlationId);
-        responseHolder.offer(response);
+        logger.debug("Cancelling consumer " + consumerTag + " on response queue " + RESPONSE_QUEUE);
         channel.basicCancel(consumerTag);
+        responseHolder.offer(response);
     }
 
     private boolean isErrorResponse(Delivery delivery) {

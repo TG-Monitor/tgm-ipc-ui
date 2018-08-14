@@ -34,9 +34,15 @@ class LoginCodeRequestHandler {
         }
     }
 
+    /**
+     * Delete the login code request queue, if it still exists. This may happen
+     * if the login request didn't actually trigger a login, because the core
+     * was already logged in.
+     *
+     * @throws IOException
+     */
     void cleanUp() throws  IOException {
-        if (channel.consumerCount(requestQueue) > 0)
-            channel.basicCancel(consumerTag);
+        channel.queueDelete(requestQueue);
     }
 
     private void declareQueue() throws IOException {

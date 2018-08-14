@@ -7,6 +7,8 @@ import ai.quantumsense.tgmonitor.logincodeprompt.LoginCodePrompt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static ai.quantumsense.tgmonitor.ipc.api.Requests.*;
@@ -61,7 +63,8 @@ public class Endpoint implements CoreFacade, CliLifecycleHandler {
     @Override
     @SuppressWarnings("unchecked")
     public Set<String> getPeers() {
-        return (Set<String>) requestSender.send(new Request(GET_PEERS)).getValue();
+        List<String> l = (List<String>) requestSender.send(new Request(GET_PEERS)).getValue();
+        return new HashSet<>(l);
     }
 
     @Override
@@ -92,7 +95,8 @@ public class Endpoint implements CoreFacade, CliLifecycleHandler {
     @Override
     @SuppressWarnings("unchecked")
     public Set<String> getPatterns() {
-        return (Set<String>) requestSender.send(new Request(GET_PATTERNS)).getValue();
+        List<String> l = (List<String>) requestSender.send(new Request(GET_PATTERNS)).getValue();
+        return new HashSet<>(l);
     }
 
     @Override
@@ -123,7 +127,8 @@ public class Endpoint implements CoreFacade, CliLifecycleHandler {
     @Override
     @SuppressWarnings("unchecked")
     public Set<String> getEmails() {
-        return (Set<String>) requestSender.send(new Request(GET_EMAILS)).getValue();
+        List<String> l = (List<String>) requestSender.send(new Request(GET_EMAILS)).getValue();
+        return new HashSet<>(l);
     }
 
     @Override

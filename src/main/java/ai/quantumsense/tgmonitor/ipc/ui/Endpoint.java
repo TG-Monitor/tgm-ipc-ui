@@ -61,10 +61,8 @@ public class Endpoint implements CoreFacade, CliLifecycleHandler {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Set<String> getPeers() {
-        List<String> l = (List<String>) requestSender.send(new Request(GET_PEERS)).getValue();
-        return new HashSet<>(l);
+        return convertResponseToSet(requestSender.send(new Request(GET_PEERS)).getValue());
     }
 
     @Override
@@ -93,10 +91,8 @@ public class Endpoint implements CoreFacade, CliLifecycleHandler {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Set<String> getPatterns() {
-        List<String> l = (List<String>) requestSender.send(new Request(GET_PATTERNS)).getValue();
-        return new HashSet<>(l);
+        return convertResponseToSet(requestSender.send(new Request(GET_PATTERNS)).getValue());
     }
 
     @Override
@@ -125,10 +121,8 @@ public class Endpoint implements CoreFacade, CliLifecycleHandler {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Set<String> getEmails() {
-        List<String> l = (List<String>) requestSender.send(new Request(GET_EMAILS)).getValue();
-        return new HashSet<>(l);
+        return convertResponseToSet(requestSender.send(new Request(GET_EMAILS)).getValue());
     }
 
     @Override
@@ -162,5 +156,10 @@ public class Endpoint implements CoreFacade, CliLifecycleHandler {
     @Override
     public void onCliDestroy() {
         connector.disconnect();
+    }
+
+    @SuppressWarnings("unchecked")
+    private Set<String> convertResponseToSet(Object response) {
+        return new HashSet<>((List<String>) response);
     }
 }
